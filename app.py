@@ -78,3 +78,4 @@ class Paper:
         return ""
     
     def get_long_message(self):
+        return ""
