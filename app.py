@@ -15,7 +15,7 @@ def load_system():
         print("Found system, opening...")
         with open("system_database.json", "wb") as f:
             data = json.load(json_file)
-            return System(data)
+            return System().from_dict(data)
     else:
         print("No system found, creating...")
         return System()
@@ -53,7 +53,7 @@ class System:
     def __init__(self, papers = []):
         self.papers = papers
         
-    def __init__(self, j):
+    def from_dict(self, j):
         self.__dict__ = json.loads(j)
         
     def add_paper(self, paper):
