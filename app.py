@@ -37,7 +37,7 @@ def slash():
         system.add_paper(Paper("Paper 1", "paper_1.com", "Best paper ever"))
         system.add_paper(Paper("Paper 2", "paper_2.com", "Second best paper ever"))
         # save_system(system)
-        return jsonify{system.get_current_message()} # jsonify(payload)
+        return jsonify(system.get_current_message()) # jsonify(payload)
 
 if __name__ == '__main__':
     app.run()
