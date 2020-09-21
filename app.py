@@ -69,6 +69,13 @@ class System:
     def from_dict(self, j):
         self.__dict__ = json.loads(j)
         
+        papers_ = []
+        
+        for p in papers:
+            papers_.append(json.loads(p))
+            
+        self.papers = papers_
+        
     def add_paper(self, paper):
         self.papers.append(paper)
         return "Paper succesfully added!"
