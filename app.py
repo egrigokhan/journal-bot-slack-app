@@ -14,11 +14,13 @@ def load_system():
 def save_system():
     return ""
 
+def get_args(s):
+    return s[s.find("<")+1:s.find(">")]
+
 @app.route('/slash', methods=['POST'])
 def slash():
     if request.form['token'] == verification_token:
-        print(request.form)
-        payload = {'text': str(request.form)}
+        payload = {'text': str(get_args(request.form["text"]))}
         return jsonify(payload)
 
 if __name__ == '__main__':
