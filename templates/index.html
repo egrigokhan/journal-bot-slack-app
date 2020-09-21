@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Inline&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Arvo&display=swap" rel="stylesheet">
+        
+    <link href="https://fonts.googleapis.com/css2?family=Bungee+Shade&display=swap" rel="stylesheet">
+
+
+    <style>
+        
+        .title {
+            font-family: "Bungee Shade";
+        }
+    
+    button {
+        background-color: black;
+        color: white;
+        border-radius: 10px;
+        width: 100px;
+        height: 40px;
+        margin-bottom: 8px;
+    }
+    
+    body {
+        font-family: 'Arvo', serif;
+        background-color: antiquewhite;
+    }
+    
+    hr {
+        border: 0;
+        height: 1px;
+        background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+    }
+    </style>
+
+</head>
+<body style="
+    text-align: center;
+    ">
+    <div class="container" style="
+        margin-top: calc((100vh - 350px) / 2);
+    ">
+    <h1 class="title">THEMIFY</h1>
+    <input type="text" id="group_input" placeholder="Enter a couple of items from the group..." style="
+        margin-top: 16px;
+        width: 600px;
+        height: 50px;
+        border: azure;
+        border-radius: 10px;
+        font-size: 20px;
+        padding: 0px 12px;
+        display: block;
+        margin: auto;
+        margin-top: 16px;
+        font-family: Arvo;
+    ">
+    <div>
+        <button onclick="getRandomGroup()" style="
+            margin-top: 16px;
+            font-family: Bungee Inline;
+            display: inline-block;</
+            div>;
+            padding: 0px 12px;
+            margin-right: 12px;
+        ">Random</button>
+        <button onclick="themify()" style="
+            margin-top: 16px;
+            font-family: Bungee Inline;
+            display: inline-block;</
+            div>;
+            padding: 0px 12px;
+        ">Themify</button>
+    <hr style="width: 30%;">
+        
+        <h1 style="
+        font-size: 20px;
+    ">The theme is</h1><h1 style="
+        font-size: 40px;
+        font-family: Bungee Inline;
+        font-weight: 700;
+        margin-top: 16px;
+        margin-bottom: 16px;
+    " id="main_theme">************</h1>
+    <h1 style="
+        font-size: 20px;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        ">More like this: <b id="more_examples" style="font-family: Bungee Inline;">****, ****, ****</b></h1></div>
+    
+        
+    <div class="footer" style="
+    position: fixed;
+    bottom: 0;
+    font-family: Bungee Inline;
+    left: 0;
+    width: 100%;
+    background-color: white;
+    /* height: 60px; */
+">
+  		<p>This website is powered by <b style="
+    font-family: Bungee Shade;
+">GPT-3</b>. Made by <b><a style="text-decoration: none;color: black;font-family: Bungee Shade;" href="http://egrigokhan.github.io/">Gokhan Egri</a></b> (not intelligent, just artificial).</p>
+	</div>
+        
+    <script>
+        var examples = [["Viva la Vida, Fix You, Paradise", "Coldplay songs", "Clocks, In My Place, Yellow"],
+                        ["Germany, France, Spain", "European countries", "Italy, Poland, United Kingdom"],
+                        ["Sheldon, Leonard, Penny, Howard, Raj", "Characters from The Big Bang Theory", "Bernadette, Amy, Stuart"],
+                        ["Mr. Tambourine Man, My Back Pages, Jokerman", "Songs of Bob Dylan", "Visions of Johanna, Like a Rolling Stone, Buckets of Rain"],
+                        ["John, Paul, Ringo, George", "Members of The Beatles", "***"],
+                        ["In the Mood for Love, Chungking Express, Happy Together", "Movies of Wong Kar-Wai", "2046, Days of Being Wild"],
+                        ["Force Awakens, Phantom Menace, The Empire Strikes Back", "Movies of the Star Wars franchise", "Attack of the Clones, A New Hope, Return of the Jedi, Revenge of the Sith"],
+                        ["1Q84, Norwegian Wood, Kafka on the Shore", "Novels of Haruki Murakami", "The Wind-up Bird Chronicle, A Wild-Sheep Chase, Killing Commandatore"],
+                        ["Ethan Hawke, Julie Delpy, Richard Linklater", "Writers and directors of Before Sunrise", "***"]]
+                        
+                        function getRandomGroup() {
+                            const randomElement = examples[Math.floor(Math.random() * examples.length)];
+
+                            document.getElementById("group_input").value = randomElement[0]
+                            document.getElementById("main_theme").innerHTML = "************"
+                            document.getElementById("more_examples").innerHTML = "****, ****, ****"
+                        }
+                        
+                        function initializeFromRandom() {
+                            const randomElement = examples[Math.floor(Math.random() * examples.length)];
+
+                            document.getElementById("group_input").value = randomElement[0]
+                            document.getElementById("main_theme").innerHTML = randomElement[1]
+                            document.getElementById("more_examples").innerHTML = randomElement[2]
+
+                        }
+    
+    function themify() {
+        var prompt = document.getElementById("group_input").value
+        
+        var xhr = new XMLHttpRequest();
+        xhr.open("POST", "https://themify.herokuapp.com/completion", false);
+        xhr.setRequestHeader('Content-Type', 'application/json');
+        xhr.send(JSON.stringify({
+            prompt: prompt
+        }));
+        
+        var arr_ = xhr.response.split(" -> ")
+        console.log(arr_)
+        document.getElementById("main_theme").innerHTML = arr_[1]
+        document.getElementById("more_examples").innerHTML = arr_[2]
+    }
+    </script>
+    
+</body>
+</html>
