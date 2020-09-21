@@ -13,8 +13,8 @@ verification_token = os.environ['VERIFICATION_TOKEN']
 def load_system():
     if(os.path.isfile('system_database.json')):
         print("Found system, opening...")
-        with open("system_database.json", "wb") as f:
-            data = json.load(json_file)
+        with open("system_database.json", "r") as f:
+            data = json.load(f)
             system = System()
             system.from_dict(data)
             return system
@@ -23,7 +23,7 @@ def load_system():
         return System()
     
 def save_system(system):
-    with open("system_database.json", "wb") as f:
+    with open("system_database.json", "w") as f:
         json.dump(system.__dict__, f)
 
 def get_args(s):
