@@ -24,7 +24,7 @@ def load_system():
     
 def save_system(system):
     with open("system_database.json", "w") as f:
-        json.dump(system.__dict__, f)
+        json.dump(system.to_dict(), f)
 
 def get_args(s):
     return re.findall(r'\<.*?\>', s) 
@@ -54,6 +54,17 @@ if __name__ == '__main__':
 class System:
     def __init__(self, papers = []):
         self.papers = papers
+        
+    def to_dict(self):
+        dict = self.__dict__
+        
+        p_dict = []
+        for p in self.papers:
+            p_dict.append(p.toJSON())
+            
+        dict["papers"] = p_dict
+        
+        return dict
         
     def from_dict(self, j):
         self.__dict__ = json.loads(j)
@@ -119,6 +130,10 @@ class Paper:
         self.pros = pros
         self.cons = cons
         self.voters = voters
+        
+    def toJSON(self):
+        return json.dumps(self, default=lambda o: o.__dict__, 
+            sort_keys=True, indent=4)
         
     def add_or_remove_vote(self, voter):
         if(voters.contains(voter)):
