@@ -1,5 +1,5 @@
 import os
-import openai
+import re
 
 from flask import Flask
 from flask import request, jsonify
@@ -15,7 +15,7 @@ def save_system():
     return ""
 
 def get_args(s):
-    return s[s.find("<")+1:s.find(">")]
+    return re.findall(r'\<.*?\>', test_str) 
 
 @app.route('/slash', methods=['POST'])
 def slash():
