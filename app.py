@@ -1,18 +1,28 @@
 import os
 import re
+import os.path
 
 from flask import Flask
 from flask import request, jsonify
+import json
 
 app = Flask(__name__)
 
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 def load_system():
-    return ""
+    if(os.path.isfile('system_database.json')):
+        print("Found system, opening...")
+        with open("system_database.json", "wb") as f:
+            data = json.load(json_file)
+            return System(data)
+     else:
+        print("No system found, creating...")
+        return System()
     
-def save_system():
-    return ""
+def save_system(system):
+    with open("system_database.json", "wb") as f:
+        json.dump(system.__dict__, f)
 
 def get_args(s):
     return re.findall(r'\<.*?\>', s) 
@@ -21,7 +31,10 @@ def get_args(s):
 def slash():
     if request.form['token'] == verification_token:
         payload = {'text': str(get_args(request.form["text"]))}
-        return jsonify(payload)
+        system = load_system()
+        system.add_paper(Paper("Paper 1", "paper_1.com", "Best paper ever"))
+        save_system(system)
+        return system.get_current_message() # jsonify(payload)
 
 if __name__ == '__main__':
     app.run()
@@ -37,8 +50,11 @@ if __name__ == '__main__':
     
     
 class System:
-    def __init__(self, papers):
+    def __init__(self, papers = []):
         self.papers = papers
+        
+    def __init__(self, j):
+        self.__dict__ = json.loads(j)
         
     def add_paper(self, paper):
         self.papers.append(paper)
