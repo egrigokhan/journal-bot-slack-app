@@ -11,6 +11,7 @@ verification_token = os.environ['VERIFICATION_TOKEN']
 @app.route('/slash', methods=['POST'])
 def slash():
     if request.form['token'] == verification_token:
+        print(request)
         payload = {'text': 'DigitalOcean Slack slash command is successful!'}
         return jsonify(payload)
 
