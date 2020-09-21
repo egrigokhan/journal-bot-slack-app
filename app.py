@@ -16,7 +16,7 @@ def load_system():
         with open("system_database.json", "wb") as f:
             data = json.load(json_file)
             return System(data)
-     else:
+    else:
         print("No system found, creating...")
         return System()
     
