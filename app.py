@@ -37,35 +37,35 @@ class System:
     def get_current_message(self):
         message = '{ "blocks": ['
         
-        paper_template = '{
+        paper_template = '''{
                                     "type": "section",
                                     "text": {
                                         "type": "mrkdwn",
                                         "text": "*<PAPER_INDEX> <PAPER_SHORT_MESSAGE>"
                                     }
-                                },'
+                                },'''
         
         for (i, p) in enumerate(self.papers):
             message += paper_template.replace("<PAPER_INDEX>", str(i)).replace("<PAPER_SHORT_MESSAGE>", p.get_short_message())
             
         
-		message += '{
+        message += '''{
                         "type": "divider"
-                    },'
+                    },'''
                     
-        message += '{
+        message += '''{
                         "type": "context",
                         "elements": [
                             {
                                 "type": "mrkdwn",
-                                "text": "👀 View all tasks with `/task list`\n❓Get help at any time with `/task help` or type *help* in a DM with me"
+                                "text": "View all tasks with `/task list`\\n Get help at any time with `/task help` or type *help* in a DM with me"
                             }
                         ]
                     }
                 ]
-            }'
+            }'''
                     
-         return message
+        return message
     
     def get_detail_for_paper(self, index):
         if(index < self.papers.count):
@@ -105,17 +105,17 @@ class Paper:
         self.cons.append(con)
         
     def get_short_message(self):
-        return "*" + self.title + "* | " + str(len(self.voters)) + " vote(s) \nURL: " + self.URL + "\n" + self.description
+        return "*" + self.title + "* | " + str(len(self.voters)) + " vote(s) \\nURL: " + self.URL + "\\n" + self.description
     
     def get_long_message(self):
         message = self.get_short_message()
         
         for pro in self.pros:
-            message += "\n➕" + pro
+            message += "\n" + pro
             
         message += "\n"
         
         for con in self.cons:
-            message += "\n➖" + cons
+            message += "\n" + cons
 
         return message
