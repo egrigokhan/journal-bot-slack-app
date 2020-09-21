@@ -35,7 +35,8 @@ class System:
         return "Paper succesfully added!"
         
     def get_current_message(self):
-        return ""
+        for p in self.papers:
+            print(p.title)
     
     def get_detail_for_paper(self, index):
         if(index < self.papers.count):
@@ -78,4 +79,4 @@ class Paper:
         return ""
     
     def get_long_message(self):
-        return ""
+        return self.pros
