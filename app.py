@@ -2,7 +2,7 @@ import os
 import openai
 
 from flask import Flask
-from flask import request, render_template
+from flask import request, jsonify
 
 app = Flask(__name__)
 
