@@ -35,8 +35,37 @@ class System:
         return "Paper succesfully added!"
         
     def get_current_message(self):
-        for p in self.papers:
-            print(p.title)
+        message = '{ "blocks": ['
+        
+        paper_template = '{
+                                    "type": "section",
+                                    "text": {
+                                        "type": "mrkdwn",
+                                        "text": "*<PAPER_INDEX> <PAPER_SHORT_MESSAGE>"
+                                    }
+                                },'
+        
+        for (i, p) in enumerate(self.papers):
+            message += paper_template.replace("<PAPER_INDEX>", str(i)).replace("<PAPER_SHORT_MESSAGE>", p.get_short_message())
+            
+        
+		message += '{
+                        "type": "divider"
+                    },'
+                    
+        message += '{
+                        "type": "context",
+                        "elements": [
+                            {
+                                "type": "mrkdwn",
+                                "text": "👀 View all tasks with `/task list`\n❓Get help at any time with `/task help` or type *help* in a DM with me"
+                            }
+                        ]
+                    }
+                ]
+            }'
+                    
+         return message
     
     def get_detail_for_paper(self, index):
         if(index < self.papers.count):
