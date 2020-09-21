@@ -76,7 +76,17 @@ class Paper:
         self.cons.append(con)
         
     def get_short_message(self):
-        return ""
+        return "*" + self.title + "* | " + str(len(self.voters)) + " vote(s) \nURL: " + self.URL + "\n" + self.description
     
     def get_long_message(self):
-        return self.pros
+        message = self.get_short_message()
+        
+        for pro in self.pros:
+            message += "\n➕" + pro
+            
+        message += "\n"
+        
+        for con in self.cons:
+            message += "\n➖" + cons
+
+        return message
