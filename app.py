@@ -15,7 +15,7 @@ def save_system():
     return ""
 
 def get_args(s):
-    return re.findall(r'\<.*?\>', test_str) 
+    return re.findall(r'\<.*?\>', s) 
 
 @app.route('/slash', methods=['POST'])
 def slash():
