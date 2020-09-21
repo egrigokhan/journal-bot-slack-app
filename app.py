@@ -15,7 +15,9 @@ def load_system():
         print("Found system, opening...")
         with open("system_database.json", "wb") as f:
             data = json.load(json_file)
-            return System().from_dict(data)
+            system = System()
+            system.from_dict(data)
+            return system
     else:
         print("No system found, creating...")
         return System()
