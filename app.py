@@ -8,16 +8,24 @@ app = Flask(__name__)
 
 verification_token = os.environ['VERIFICATION_TOKEN']
 
+def load_system():
+    return ""
+    
+def save_system():
+    return ""
+
 @app.route('/slash', methods=['POST'])
 def slash():
     if request.form['token'] == verification_token:
-        print(request)
-        payload = {'text': 'DigitalOcean Slack slash command is successful!'}
+        print(request.form)
+        payload = {'text': str(request.form)}
         return jsonify(payload)
-
 
 if __name__ == '__main__':
     app.run()
+    
+    
+    # s = json.dumps(foo.__dict__)
 
     
     
