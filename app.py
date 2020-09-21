@@ -11,7 +11,7 @@ app = Flask(__name__)
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 def load_system():
-    if(false):#os.path.isfile('system_database.json')):
+    if(False):#os.path.isfile('system_database.json')):
         print("Found system, opening...")
         with open("system_database.json", "r") as f:
             data = json.load(f)
