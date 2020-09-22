@@ -27,7 +27,13 @@ def save_system(system):
             pickle.dump(system, f)
 
 def get_args(s):
-    return re.findall(r'\<.*?\>', str(s)) 
+    args_ = re.findall(r'\<.*?\>', str(s)) 
+    args_clean = []
+    
+    for arg in args_:
+        args_clean.append(arg[1:-1])
+        
+    return args_clean
 
 @app.route('/status', methods=['POST'])
 def status():
@@ -44,7 +50,7 @@ def detail():
         system = load_system()
         
         system.add_paper(Paper("Paper 1", "paper1.com", "Best paper ever"))
-        save_system()
+        save_system(system)
         
         return jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
 
