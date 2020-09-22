@@ -5,26 +5,26 @@ import os.path
 from flask import Flask
 from flask import request, jsonify
 import json
+import pickle
 
 app = Flask(__name__)
 
 verification_token = os.environ['VERIFICATION_TOKEN']
 
 def load_system():
-    if(False):#os.path.isfile('system_database.json')):
-        print("Found system, opening...")
-        with open("system_database.json", "r") as f:
-            data = json.load(f)
-            system = System()
-            system.from_dict(data)
-            return system
+    if(os.path.isfile('system.pickle')):
+        with open('system.pickle', 'rb') as f:
+            print("Found system, opening...")
+            return pickle.load(f)
+
     else:
         print("No system found, creating...")
         return System()
     
 def save_system(system):
-    with open("system_database.json", "w") as f:
-        json.dump(system.to_dict(), f)
+    with open('system.pickle', 'rb') as f:
+            print("Saving system...")
+            pickle.dump(system, f)
 
 def get_args(s):
     return re.findall(r'\<.*?\>', s) 
