@@ -154,7 +154,7 @@ class System:
                         "elements": [
                             {
                                 "type": "mrkdwn",
-                                "text": "See the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
+                                "text": "🤖 *Please include the `<` `>` for correct parsing*\\nSee the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
                             }
                         ]
                     }
@@ -187,7 +187,7 @@ class System:
                             "elements": [
                                 {
                                     "type": "mrkdwn",
-                                    "text": "See the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
+                                    "text": "🤖 *Please include the `<` `>` for correct parsing*\\nSee the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
                                 }
                             ]
                         }
