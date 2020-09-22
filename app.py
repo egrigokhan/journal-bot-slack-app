@@ -37,7 +37,8 @@ def slash():
         system.add_paper(Paper("Paper 1", "paper_1.com", "Best paper ever"))
         system.add_paper(Paper("Paper 2", "paper_2.com", "Second best paper ever"))
         save_system(system)
-        return '{ "blocks": [ { "type": "section", "text": { "type": "mrkdwn", "text": "*0 Paper 1 | 0 vote(s) \nURL: paper_1.com\nBest paper ever" } }, { "type": "section", "text": { "type": "mrkdwn", "text": "*1 Paper 2 | 0 vote(s) \nURL: paper_2.com\nSecond best paper ever" } }, { "type": "section", "text": { "type": "mrkdwn", "text": "*2 Paper 1 | 0 vote(s) \nURL: paper_1.com\nBest paper ever" } }, { "type": "section", "text": { "type": "mrkdwn", "text": "*3 Paper 2 | 0 vote(s) \nURL: paper_2.com\nSecond best paper ever" } }, { "type": "divider" }, { "type": "context", "elements": [ { "type": "mrkdwn", "text": "View all tasks with /task list\n Get help at any time with /task help or type help in a DM with me" } ] } ] }' # system.get_current_message() # jsonify(payload)
+        
+        return jsonify(json.loads(system.get_current_message(), strict=False)) # system.get_current_message() # jsonify(payload)
 
 if __name__ == '__main__':
     app.run()
