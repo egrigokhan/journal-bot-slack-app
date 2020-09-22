@@ -137,7 +137,7 @@ class System:
                                     "type": "section",
                                     "text": {
                                         "type": "mrkdwn",
-                                        "text": "*<PAPER_INDEX>* <PAPER_SHORT_MESSAGE>"
+                                        "text": "*[<PAPER_INDEX>]* <PAPER_SHORT_MESSAGE>"
                                     }
                                 },'''
         
@@ -154,7 +154,7 @@ class System:
                         "elements": [
                             {
                                 "type": "mrkdwn",
-                                "text": "View all tasks with `/task list`\\n Get help at any time with `/task help` or type *help* in a DM with me"
+                                "text": "See the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
                             }
                         ]
                     }
@@ -187,7 +187,7 @@ class System:
                             "elements": [
                                 {
                                     "type": "mrkdwn",
-                                    "text": "View all tasks with `/task list`\\n Get help at any time with `/task help` or type *help* in a DM with me"
+                                    "text": "See the current papers/votes with `/current`\\n See the details of a paper with `/detail <paper_no>`\\n Add a paper with `/add <title> <URL> <description>`\\n Vote for a paper with `/vote <paper_no>`\\n Add pro/con to paper with `/add_pro <paper no> <pro>`/`/add_con <paper no> <con>`"
                                 }
                             ]
                         }
@@ -238,19 +238,20 @@ class Paper:
     
     def get_long_message(self):
         message = self.get_short_message() + "\\n\\n"
-        message += "Voter(s):\\n"
+        
+        message += "*Voter(s):*\\n"
         
         for voter in self.voters:
             message += voter + "\\n"
             
-        message += "\\nPros:\\n"
+        message += "\\n*Pros:*\\n"
         
         for pro in self.pros:
-            message += "\\n" + pro
+            message += "\\n➕ " + pro
             
-        message += "\\n\\nCons:\\n"
+        message += "\\n\\n*Cons:*\\n"
         
         for con in self.cons:
-            message += "\\n" + cons
+            message += "\\n➖ " + cons
 
         return message
