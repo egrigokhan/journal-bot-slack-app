@@ -61,6 +61,7 @@ packaging==20.4
 parso==0.5.1
 pexpect==4.7.0
 pickleshare==0.7.5
+pickle-mixin
 Pillow==7.1.2
 pluggy==0.13.1
 proglog==0.1.9
