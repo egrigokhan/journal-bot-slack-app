@@ -174,7 +174,7 @@ class Paper:
             sort_keys=True, indent=4)
         
     def add_or_remove_vote(self, voter):
-        if(self.voters.contains(voter)):
+        if(voter in self.voters):
             self.voters.remove(voter)
         else:
             self.voters.append(voter)
