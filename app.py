@@ -51,7 +51,7 @@ def detail():
         return jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
     
 @app.route('/add', methods=['POST'])
-def detail():
+def add():
     if request.form['token'] == verification_token:
         args = get_args(request.form["text"])
         system = load_system()        
