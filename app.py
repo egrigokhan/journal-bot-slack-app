@@ -22,7 +22,7 @@ def load_system():
         return System()
     
 def save_system(system):
-    with open('system.pickle', 'rb') as f:
+    with open('system.pickle', 'wb') as f:
             print("Saving system...")
             pickle.dump(system, f)
 
