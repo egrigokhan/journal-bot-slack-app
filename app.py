@@ -62,10 +62,10 @@ def add():
 @app.route('/vote', methods=['POST'])
 def vote():
     if request.form['token'] == verification_token:
-        print(request.form)
+        # print(request.form)
         args = get_args(request.form["text"])
         system = load_system()
-        system.add_or_remove_vote_from_paper(int(args[0]), request.form["username"])
+        system.add_or_remove_vote_from_paper(int(args[0]), request.form["user_name"])
         save_system(system)
         return "Added/removed vote!"
 
