@@ -59,6 +59,25 @@ def add():
         save_system(system)
         return "Added paper!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
 
+@app.route('/add_pro', methods=['POST'])
+def add_pro():
+    if request.form['token'] == verification_token:
+        args = get_args(request.form["text"])
+        system = load_system()        
+        system.add_pro_for_paper(args[0], args[1])
+        save_system(system)
+        return "Added pro!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
+
+    
+@app.route('/add_con', methods=['POST'])
+def add_con():
+    if request.form['token'] == verification_token:
+        args = get_args(request.form["text"])
+        system = load_system()        
+        system.add_con_for_paper(args[0], args[1])
+        save_system(system)
+        return "Added con!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
+
 @app.route('/vote', methods=['POST'])
 def vote():
     if request.form['token'] == verification_token:
@@ -218,14 +237,20 @@ class Paper:
         return "*" + self.title + "* | " + str(len(self.voters)) + " vote(s) \\nURL: " + self.URL + "\\n" + self.description
     
     def get_long_message(self):
-        message = self.get_short_message()
+        message = self.get_short_message() + "\\n\\n"
+        message += "Voter(s):\\n"
+        
+        for voter in self.voters:
+            message += voter + "\\n"
+            
+        message += "\\nPros:\\n"
         
         for pro in self.pros:
-            message += "\n" + pro
+            message += "\\n" + pro
             
-        message += "\n"
+        message += "\\n\\nCons:\\n"
         
         for con in self.cons:
-            message += "\n" + cons
+            message += "\\n" + cons
 
         return message
