@@ -174,10 +174,10 @@ class Paper:
             sort_keys=True, indent=4)
         
     def add_or_remove_vote(self, voter):
-        if(voters.contains(voter)):
-            voters.remove(voter)
+        if(self.voters.contains(voter)):
+            self.voters.remove(voter)
         else:
-            voters.append(voter)
+            self.voters.append(voter)
 
     def add_pro(self, pro):
         self.pros.append(pro)
