@@ -118,12 +118,12 @@ class System:
                                     "type": "section",
                                     "text": {
                                         "type": "mrkdwn",
-                                        "text": "<PAPER_SHORT_MESSAGE>"
+                                        "text": "*<PAPER_INDEX>* <PAPER_SHORT_MESSAGE>"
                                     }
                                 },'''
         
         for (i, p) in enumerate(self.papers):
-            message += paper_template.replace("<PAPER_SHORT_MESSAGE>", p.get_short_message())
+            message += paper_template.replace("<PAPER_INDEX>", str(i)).replace("<PAPER_SHORT_MESSAGE>", p.get_short_message())
             
         
         message += '''{
@@ -152,11 +152,11 @@ class System:
                                         "type": "section",
                                         "text": {
                                             "type": "mrkdwn",
-                                            "text": "*<PAPER_INDEX> <PAPER_LONG_MESSAGE>"
+                                            "text": "<PAPER_LONG_MESSAGE>"
                                         }
                                     },'''
 
-            message += paper_template.replace("<PAPER_INDEX>", str(i)).replace("<PAPER_LONG_MESSAGE>", self.papers[index].get_long_message())
+            message += paper_template.replace("<PAPER_LONG_MESSAGE>", self.papers[index].get_long_message())
 
 
             message += '''{
