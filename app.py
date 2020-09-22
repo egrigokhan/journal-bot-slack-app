@@ -146,7 +146,36 @@ class System:
     
     def get_detail_for_paper(self, index):
         if(index < len(self.papers)):
-            return self.papers[index].get_long_message()
+            message = '{ "blocks": ['
+        
+            paper_template = '''{
+                                        "type": "section",
+                                        "text": {
+                                            "type": "mrkdwn",
+                                            "text": "*<PAPER_INDEX> <PAPER_LONG_MESSAGE>"
+                                        }
+                                    },'''
+
+            message += paper_template.replace("<PAPER_INDEX>", str(i)).replace("<PAPER_LONG_MESSAGE>", self.papers[index].get_long_message())
+
+
+            message += '''{
+                            "type": "divider"
+                        },'''
+
+            message += '''{
+                            "type": "context",
+                            "elements": [
+                                {
+                                    "type": "mrkdwn",
+                                    "text": "View all tasks with `/task list`\\n Get help at any time with `/task help` or type *help* in a DM with me"
+                                }
+                            ]
+                        }
+                    ]
+                }'''
+
+            return message
         
     def add_pro_for_paper(self, index, pro):
         if(index < len(self.papers)):
