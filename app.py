@@ -47,12 +47,26 @@ def status():
 def detail():
     if request.form['token'] == verification_token:
         args = get_args(request.form["text"])
-        system = load_system()
-        
-        system.add_paper(Paper("Paper 1", "paper1.com", "Best paper ever"))
-        save_system(system)
-        
+        system = load_system()        
         return jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
+    
+@app.route('/add', methods=['POST'])
+def detail():
+    if request.form['token'] == verification_token:
+        args = get_args(request.form["text"])
+        system = load_system()        
+        system.add_paper(Paper(args[0], args[1], args[2]))
+        save_system(system)
+        return "Added paper!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
+
+@app.route('/vote', methods=['POST'])
+def vote():
+    if request.form['token'] == verification_token:
+        args = get_args(request.form["text"])
+        system = load_system()
+        system.add_or_remove_vote_from_paper(int(args[0]), request.form["username"])
+        save_system(system)
+        return "Added/removed vote!"
 
 if __name__ == '__main__':
     app.run()
