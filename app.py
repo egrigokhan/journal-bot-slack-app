@@ -64,7 +64,7 @@ def add_pro():
     if request.form['token'] == verification_token:
         args = get_args(request.form["text"])
         system = load_system()        
-        system.add_pro_for_paper(args[0], args[1])
+        system.add_pro_for_paper(int(args[0]), args[1])
         save_system(system)
         return "Added pro!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
 
@@ -74,7 +74,7 @@ def add_con():
     if request.form['token'] == verification_token:
         args = get_args(request.form["text"])
         system = load_system()        
-        system.add_con_for_paper(args[0], args[1])
+        system.add_con_for_paper(int(args[0]), args[1])
         save_system(system)
         return "Added con!" # jsonify(json.loads(system.get_detail_for_paper(int(args[0])), strict=False)) # system.get_current_message() # jsonify(payload)
 
