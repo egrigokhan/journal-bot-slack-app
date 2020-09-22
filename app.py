@@ -130,19 +130,19 @@ class System:
         return message
     
     def get_detail_for_paper(self, index):
-        if(index < self.papers.count):
+        if(index < len(self.papers)):
             return self.papers[index].get_long_message()
         
     def add_pro_for_paper(self, index, pro):
-        if(index < self.papers.count):
+        if(index < len(self.papers)):
             return self.papers[index].add_pro(pro)
         
     def add_con_for_paper(self, index, con):
-        if(index < self.papers.count):
+        if(index < len(self.papers)):
             return self.papers[index].add_con(con)
         
     def add_or_remove_vote_from_paper(self, index, voter):
-        if(index < self.papers.count):
+        if(index < len(self.papers)):
             return self.papers[index].add_or_remove_vote(voter)
     
 class Paper:
